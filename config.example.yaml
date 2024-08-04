@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+telemetry:
+  enable: true
+  jaeger:
+    trace_ratio: 1
+    agent_host: localhost
+    agent_port: 4138
+
+log:
+  ignore:
+    - /health
+    - /swagger
+    - /favicon.ico
+    - /document

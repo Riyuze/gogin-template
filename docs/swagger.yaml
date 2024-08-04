@@ -1,0 +1,94 @@
+definitions:
+  dto.PageInfo:
+    properties:
+      CurrentPageIndex:
+        description: Current Page Index
+        example: 1
+        type: integer
+      MaxPageIndex:
+        description: Max Page Index
+        example: 10
+        type: integer
+      RowsPerPage:
+        description: Rows Per Page
+        example: 100
+        type: integer
+      TotalAvailableItems:
+        description: Total Available Items
+        example: 1000
+        type: integer
+    type: object
+  dto.Response-any:
+    properties:
+      Data:
+        description: Data (any model)
+      LogReff:
+        description: LogReff (use this to search in splunk)
+        example: LogReffLogReffLogReffLogReff
+        type: string
+      PageInfo:
+        allOf:
+        - $ref: '#/definitions/dto.PageInfo'
+        description: PageInfo (only for response type list with pages)
+      ResponseCode:
+        description: Http Response Code
+        example: "200"
+        type: string
+      ResponseMessage:
+        description: Response Message)
+        example: Messages Messages Messages
+        type: string
+      TraceId:
+        description: TraceId (use this as trace id in jaeger)
+        example: TraceIdTraceIdTraceIdTraceId
+        type: string
+    type: object
+  dto.Response-string:
+    properties:
+      Data:
+        description: Data (any model)
+        type: string
+      LogReff:
+        description: LogReff (use this to search in splunk)
+        example: LogReffLogReffLogReffLogReff
+        type: string
+      PageInfo:
+        allOf:
+        - $ref: '#/definitions/dto.PageInfo'
+        description: PageInfo (only for response type list with pages)
+      ResponseCode:
+        description: Http Response Code
+        example: "200"
+        type: string
+      ResponseMessage:
+        description: Response Message)
+        example: Messages Messages Messages
+        type: string
+      TraceId:
+        description: TraceId (use this as trace id in jaeger)
+        example: TraceIdTraceIdTraceIdTraceId
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /health:
+    get:
+      description: Get Health
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.Response-string'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response-any'
+      summary: Get Health
+      tags:
+      - Health
+swagger: "2.0"
