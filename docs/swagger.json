@@ -1,0 +1,137 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/health": {
+            "get": {
+                "description": "Get Health",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Get Health",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.Response-string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/dto.Response-any"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.PageInfo": {
+            "type": "object",
+            "properties": {
+                "CurrentPageIndex": {
+                    "description": "Current Page Index",
+                    "type": "integer",
+                    "example": 1
+                },
+                "MaxPageIndex": {
+                    "description": "Max Page Index",
+                    "type": "integer",
+                    "example": 10
+                },
+                "RowsPerPage": {
+                    "description": "Rows Per Page",
+                    "type": "integer",
+                    "example": 100
+                },
+                "TotalAvailableItems": {
+                    "description": "Total Available Items",
+                    "type": "integer",
+                    "example": 1000
+                }
+            }
+        },
+        "dto.Response-any": {
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "description": "Data (any model)"
+                },
+                "LogReff": {
+                    "description": "LogReff (use this to search in splunk)",
+                    "type": "string",
+                    "example": "LogReffLogReffLogReffLogReff"
+                },
+                "PageInfo": {
+                    "description": "PageInfo (only for response type list with pages)",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/dto.PageInfo"
+                        }
+                    ]
+                },
+                "ResponseCode": {
+                    "description": "Http Response Code",
+                    "type": "string",
+                    "example": "200"
+                },
+                "ResponseMessage": {
+                    "description": "Response Message)",
+                    "type": "string",
+                    "example": "Messages Messages Messages"
+                },
+                "TraceId": {
+                    "description": "TraceId (use this as trace id in jaeger)",
+                    "type": "string",
+                    "example": "TraceIdTraceIdTraceIdTraceId"
+                }
+            }
+        },
+        "dto.Response-string": {
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "description": "Data (any model)",
+                    "type": "string"
+                },
+                "LogReff": {
+                    "description": "LogReff (use this to search in splunk)",
+                    "type": "string",
+                    "example": "LogReffLogReffLogReffLogReff"
+                },
+                "PageInfo": {
+                    "description": "PageInfo (only for response type list with pages)",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/dto.PageInfo"
+                        }
+                    ]
+                },
+                "ResponseCode": {
+                    "description": "Http Response Code",
+                    "type": "string",
+                    "example": "200"
+                },
+                "ResponseMessage": {
+                    "description": "Response Message)",
+                    "type": "string",
+                    "example": "Messages Messages Messages"
+                },
+                "TraceId": {
+                    "description": "TraceId (use this as trace id in jaeger)",
+                    "type": "string",
+                    "example": "TraceIdTraceIdTraceIdTraceId"
+                }
+            }
+        }
+    }
+}
